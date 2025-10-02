@@ -11,11 +11,14 @@
     "preview": "vite preview --config packages/react-frontend/vite.config.js"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.3",
+    "express-backend": "^1.0.0",
+    "nodemon": "^3.1.10",
     "vite": "^7.1.7"
   }
 }
