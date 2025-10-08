@@ -1,8 +1,8 @@
 import express from "express";
-
+import cors from "cors";
 const app = express();
 const port = 8000;
-
+app.use(cors());
 app.use(express.json());
 
 // Initial in-memory user list
@@ -29,8 +29,9 @@ const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
 const addUser = (user) => {
-  users["users_list"].push(user);
-  return user;
+  const newUser = { ...user, id: Math.random().toString(36).substr(2, 6) };
+  users["users_list"].push(newUser);
+  return newUser;
 };
 
 const deleteUserById = (id) => {
@@ -79,8 +80,8 @@ app.get("/users/:id", (req, res) => {
 // Add new user
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.status(201).send(userToAdd); // 201 Created
+  const newUser = addUser(userToAdd);
+  res.status(201).send(newUser); // 201 Created + return new user with ID
 });
 
 // Delete user by ID
